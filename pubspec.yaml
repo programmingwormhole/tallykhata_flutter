@@ -38,6 +38,10 @@ dependencies:
   get_cli:
   get: ^4.7.2
   flutter_svg:
+  get_storage:
+  firebase_core: ^2.0.0
+  cloud_firestore:
+  firebase_auth:
 
 dev_dependencies:
   flutter_test:

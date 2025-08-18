@@ -1,3 +1,4 @@
+import 'package:tallykhata/app/widgets/snackbar.dart';
 import 'package:tallykhata/exports.dart';
 import '../controllers/auth_controller.dart';
 
@@ -85,10 +86,29 @@ class AuthView extends GetView<AuthController> {
                         const SizedBox(
                           height: 20,
                         ),
-                        const CustomTextField(
+                        CustomTextField(
+                          controller: controller.numberController,
                           labelText: 'মোবাইল নাম্বার',
-                          hintText: 'আপনার মোবাইল নাম্বার লিখুন',
+                          hintText: 'xxxxxxxxx',
+                          prefixText: '+880',
                           leadingIcon: Icons.call,
+                          keyboardType: TextInputType.number,
+                          onChanged: (value) {
+                            if (value.startsWith('0') ||
+                                value.startsWith('8') ||
+                                !value.startsWith('1')) {
+                              snackBar('The number should be start with 1!');
+                              controller.numberController.clear();
+                              return;
+                            }
+
+                            controller.number.value = value;
+                            controller.numberWithCountryCode.value = '+880$value';
+                          },
+                          inputFormatters: [
+                            FilteringTextInputFormatter.digitsOnly,
+                            LengthLimitingTextInputFormatter(10),
+                          ],
                         ),
                         const SizedBox(
                           height: 10,
@@ -127,25 +147,14 @@ class AuthView extends GetView<AuthController> {
                     ),
                     Column(
                       children: [
-                        Container(
-                          width: MediaQueryUtils.width,
-                          decoration: BoxDecoration(
-                            color: AppColors.PRIMARY,
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 15,
-                            vertical: 12,
-                          ),
-                          child: const Center(
-                            child: Text(
-                              'পরবর্তী',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 17,
-                                fontWeight: FontWeight.w800,
-                              ),
-                            ),
+                        Obx(
+                          () => CustomButton(
+                            label: 'পরবর্তী',
+                            buttonType: controller.number.isEmpty ||
+                                    controller.number.value.length < 10
+                                ? ButtonType.DISABLED
+                                : ButtonType.ENABLED,
+                            onTap: controller.loginOrRegister,
                           ),
                         ),
                         const SizedBox(

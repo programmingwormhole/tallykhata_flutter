@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "314165111437",
+    "project_id": "tallykhata-aecfa",
+    "storage_bucket": "tallykhata-aecfa.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:314165111437:android:6042f671c9cdd7ba76d0c4",
+        "android_client_info": {
+          "package_name": "com.tallykhata.wormhole"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDl9c5XQ9EcpHX4OLbM0Zd4Oq8ASYZe2yA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -25,6 +25,9 @@ class $AssetsImagesGen {
 class $AssetsSvgGen {
   const $AssetsSvgGen();
 
+  /// File path: assets/svg/crown.svg
+  String get crown => 'assets/svg/crown.svg';
+
   /// File path: assets/svg/onboard_calculator.svg
   String get onboardCalculator => 'assets/svg/onboard_calculator.svg';
 
@@ -35,7 +38,7 @@ class $AssetsSvgGen {
   String get product => 'assets/svg/product.svg';
 
   /// List of all assets
-  List<String> get values => [onboardCalculator, onboardQrcode, product];
+  List<String> get values => [crown, onboardCalculator, onboardQrcode, product];
 }
 
 class Assets {

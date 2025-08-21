@@ -155,6 +155,7 @@ class AuthView extends GetView<AuthController> {
                                 ? ButtonType.DISABLED
                                 : ButtonType.ENABLED,
                             onTap: controller.loginOrRegister,
+                            isLoading: controller.isOTPSending.value,
                           ),
                         ),
                         const SizedBox(

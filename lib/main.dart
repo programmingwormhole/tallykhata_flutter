@@ -1,6 +1,11 @@
 import 'exports.dart';
 
-void main() {
+void main() async {
+
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Get.putAsync(() => FirebaseService().init());
+
   runApp(const MyApp());
 }
 
@@ -9,7 +14,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     MediaQueryUtils.initialize(context);
 
     return GetMaterialApp(

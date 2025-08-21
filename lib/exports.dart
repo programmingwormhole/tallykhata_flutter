@@ -10,3 +10,4 @@ export 'package:tallykhata/app/core/themes/app_theme.dart';
 export 'package:tallykhata/app/core/config/config.dart';
 export 'app/routes/app_pages.dart';
 export 'package:flutter/services.dart';
+export 'package:tallykhata/app/data/services/firebase_service.dart';

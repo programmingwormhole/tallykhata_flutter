@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:tallykhata/app/widgets/snackbar.dart';
@@ -26,6 +27,8 @@ class AuthController extends GetxController {
 
   FirebaseAuth auth = FirebaseService.to.auth;
 
+  FirebaseFirestore firestore = FirebaseService.to.firestore;
+
   Future loginOrRegister() async {
     isOTPSending.value = true;
 
@@ -39,6 +42,8 @@ class AuthController extends GetxController {
           isOTPSending.value = false;
 
           snackBar(error.message!);
+
+          print(error.message!);
 
           if (error.code == 'invalid-phone-number') {
             snackBar('আপনার মোবাইল নাম্বারটি সঠিক নয়।');
@@ -70,7 +75,6 @@ class AuthController extends GetxController {
     isOTPVerifying.value = true;
 
     try {
-
       PhoneAuthCredential credential = PhoneAuthProvider.credential(
         verificationId: verificationID.value,
         smsCode: otp.value,
@@ -79,32 +83,46 @@ class AuthController extends GetxController {
       _signInWithInfo(credential);
 
       isOTPVerifying.value = false;
-
-    }
-    on FirebaseAuthException catch (e) {
-
+    } on FirebaseAuthException catch (e) {
       isOTPVerifying.value = false;
       snackBar(e.message!);
-
-    }
-    catch (e) {
+    } catch (e) {
       isOTPVerifying.value = false;
       snackBar('একটি সমস্যা হয়েছে। ${e.toString()}');
     }
   }
 
-  Future<UserCredential> _signInWithInfo (AuthCredential credential) async {
-
+  Future<UserCredential> _signInWithInfo(AuthCredential credential) async {
     isOTPVerifying.value = true;
-
-    snackBar('আপনার ভেরিফিকেশন সফল হয়েছে!');
 
     UserCredential userData = await auth.signInWithCredential(credential);
 
-    // TODO:: Check user profile info and navigate
-    Get.offAllNamed(
-      Routes.PROFILE_SETUP,
-    );
+    if (userData.user != null) {
+      User user = userData.user!;
+
+      isOTPVerifying.value = false;
+      snackBar('আপনার ভেরিফিকেশন সফল হয়েছে!');
+
+      DocumentSnapshot userDoc = await firestore.collection('users').doc(user.phoneNumber).get();
+
+      if (userDoc.exists) {
+
+        Get.offAllNamed(
+          Routes.HOME,
+        );
+
+      } else {
+
+        Get.offAllNamed(
+          Routes.PROFILE_SETUP,
+        );
+      }
+
+      return userData;
+    }
+
+    isOTPVerifying.value = false;
+    snackBar('User not found after sign-in.');
 
     return userData;
   }

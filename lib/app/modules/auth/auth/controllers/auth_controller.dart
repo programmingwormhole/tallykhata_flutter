@@ -72,6 +72,8 @@ class AuthController extends GetxController {
   }
 
   Future verifyOTP() async {
+
+
     isOTPVerifying.value = true;
 
     try {
@@ -94,6 +96,7 @@ class AuthController extends GetxController {
 
   Future<UserCredential> _signInWithInfo(AuthCredential credential) async {
     isOTPVerifying.value = true;
+
 
     UserCredential userData = await auth.signInWithCredential(credential);
 

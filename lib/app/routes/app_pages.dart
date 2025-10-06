@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 
+import '../modules/add/bindings/add_binding.dart';
+import '../modules/add/views/add_view.dart';
 import '../modules/auth/auth/bindings/auth_binding.dart';
 import '../modules/auth/auth/views/auth_view.dart';
 import '../modules/auth/otp/bindings/otp_binding.dart';
@@ -52,6 +54,11 @@ class AppPages {
       name: _Paths.OTP,
       page: () => const OtpView(),
       binding: OtpBinding(),
+    ),
+    GetPage(
+      name: _Paths.ADD,
+      page: () => const AddView(),
+      binding: AddBinding(),
     ),
   ];
 }

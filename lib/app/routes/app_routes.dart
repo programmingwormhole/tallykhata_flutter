@@ -9,6 +9,7 @@ abstract class Routes {
   static const OTP = _Paths.OTP;
   static const PROFILE_SETUP = _Paths.AUTH + _Paths.PROFILE_SETUP;
   static const WELCOME = _Paths.AUTH + _Paths.WELCOME;
+  static const ADD = _Paths.ADD;
 }
 
 abstract class _Paths {
@@ -19,4 +20,5 @@ abstract class _Paths {
   static const OTP = '/otp';
   static const PROFILE_SETUP = '/profile-setup';
   static const WELCOME = '/welcome';
+  static const ADD = '/add';
 }

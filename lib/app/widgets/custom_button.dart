@@ -51,7 +51,7 @@ class CustomButton extends StatelessWidget {
                   ),
                 )
               : Text(
-                  'পরবর্তী',
+                  label,
                   style: TextStyle(
                     color: Colors.white.withOpacity(
                       isDisabled ? .8 : 1,
